@@ -24,7 +24,7 @@
 
     @if ($comments)
         @foreach ($comments as $comment)
-            @livewire('reply', ['comment' => $comment])
+            @livewire('reply', ['topic_id' => $topic_id, 'comment' => $comment])
         @endforeach
     @endif
 

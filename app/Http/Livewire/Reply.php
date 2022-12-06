@@ -3,10 +3,14 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Traits\apiKeyInject;
+use Illuminate\Support\Facades\Session;
 
 class Reply extends Component
 {
-    public $comment_id, $author_id, $score, $body;
+    use apiKeyInject;
+
+    public $topic_id, $comment_id, $author_id, $score, $body;
     public $form = [
         'comment_id' => '',
         'commentoncomment' => 'ss',
@@ -33,7 +37,7 @@ class Reply extends Component
         }
     }
 
-    public function mount($comment)
+    public function mount($topic_id, $comment)
     {
         $this->form['comment_id'] = $comment['id'];
         $this->form['commentoncomment'] = $comment['body'];
@@ -41,6 +45,7 @@ class Reply extends Component
         $this->author_id = $comment['author_id'];
         $this->score = $comment['score'];
         $this->body = $comment['body'];
+        $this->topic_id = $topic_id;
     }
 
 
