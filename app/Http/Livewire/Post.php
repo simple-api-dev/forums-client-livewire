@@ -10,9 +10,9 @@ class Post extends Component
 {
     use apiKeyInject;
     public $comments = [];
-    public $topic_id = null;
+    public $topic_id = '';
     public $form = [
-        'comment' => 'dfgfd',
+        'comment' => 'aaa',
     ];
 
     public function submit()
@@ -29,7 +29,6 @@ class Post extends Component
 
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment added successfully');
-            return redirect(route('post'));
         } else {
             session()->flash('message', $response['message']);
         }

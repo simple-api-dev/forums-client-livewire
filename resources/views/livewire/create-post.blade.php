@@ -1,6 +1,6 @@
 <div class="my-10 flex justify-center w-full">
     <section class="border rounded shadow-lg p-4 w-6/12 bg-gray-200">
-        <h1 class="text-center text-3xl my-5">Create Post</h1>
+        <h1 class="text-center text-3xl my-5">Create Topic</h1>
         <hr>
 
         @if (session()->has('message'))
@@ -12,7 +12,7 @@
         <form class="my-4" wire:submit.prevent="submit">
             <div class="flex justify-around my-8">
                 <div class="flex flex-wrap w-10/12">
-                    <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Post Title"
+                    <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Topic Title"
                         wire:model="form.title" />
                     @error('form.title')
                         <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -22,7 +22,7 @@
 
             <div class="flex justify-around my-8">
                 <div class="flex flex-wrap w-10/12">
-                    <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Post Body"
+                    <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Topic Body"
                         wire:model="form.body" />
                     @error('form.body')
                         <span class="text-red-500 text-xs">{{ $message }}</span>

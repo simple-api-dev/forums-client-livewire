@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', App\Http\Livewire\Home::class)->name('home');
 Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id')->name('post');
+Route::post('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id')->name('post');
 
 
 

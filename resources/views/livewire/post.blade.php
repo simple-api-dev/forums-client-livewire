@@ -30,6 +30,6 @@
 
 
     @foreach ($comments as $comment)
-        @livewire('comment', ['comment_id' => $comment->id])
+        @livewire('comment', ['topic_id' => $topic_id, 'comment_id' => $comment->id])
     @endforeach
 </div>

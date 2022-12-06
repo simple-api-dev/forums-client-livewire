@@ -10,7 +10,7 @@ class Comment extends Component
 {
 
     use apiKeyInject;
-    public $comment_id, $body, $status, $author_id, $reports, $score, $comments;
+    public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments;
     
     public function destroyComment($comment_id)
     {
@@ -18,7 +18,7 @@ class Comment extends Component
         if ($response->getStatusCode() <> 200) {
             session()->flash('message', $response['message']);
         }
-        return redirect(route('post'));
+        return redirect('post/' . $this->topic_id);
     }
 
 
@@ -34,7 +34,7 @@ class Comment extends Component
         if ($response->getStatusCode() <> 200) {
             session()->flash('message', $response['message']);
         }
-        return redirect(route('post'));
+        return redirect('post/' . $this->topic_id);
     }
 
 
@@ -68,9 +68,10 @@ class Comment extends Component
     }
 
 
-    public function mount($comment_id)
+    public function mount($topic_id, $comment_id)
     {
         $response = $this->injectApi()->get(getenv('API_SITE') . '/comments/' . $comment_id);
+        $this->topic_id = $topic_id;
         $this->comment_id = $comment_id;
         $this->body = $response['body'];
         $this->status = $response['status'];
