@@ -8,21 +8,23 @@
         @endif
     </div>
 
-    <div class="flex flex-row">
-        <div>
-            <i class="fa fa-cubes fa-2x text-gray-300 mt-3"></i>
+    <form class="my-4" wire:submit.prevent="submit">
+        <div class="flex flex-row">
+            <div class="bg-slate flex-grow p-2">
+                <div class="flex justify-around my-8">
+                    <div class="flex flex-wrap w-10/12">
+                        <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
+                            wire:model="form.comment" />
+                        @error('form.comment')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <input type="submit" value="Save" class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
+
+                </div>
+            </div>
         </div>
-        <div class="bg-slate flex-grow p-2">
-            <a href="/createpost">
-                <div class="w-full border-2 border-black-100 bg-slate-100  hover:border-2 hover:border-blue-900">
-                    Add Comment</div>
-            </a>
-        </div>
-        <div>
-            <i class="fa fa-picture-o fa-1x text-gray-300"></i>
-            <i class="fa fa-link fa-1x text-gray-300"></i>
-        </div>
-    </div>
+    </form>
 
     <div class="h-5 bg-slate-300"></div>
 
