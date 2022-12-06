@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', App\Http\Livewire\Home::class)->name('home');
 Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id')->name('post');
-Route::post('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id')->name('post');
 
 
 
@@ -23,3 +22,4 @@ Route::get('/login', App\Http\Livewire\Login::class);
 Route::get('/logout', App\Http\Livewire\Logout::class);
 Route::get('/register', App\Http\Livewire\Register::class);
 Route::get('/createpost', App\Http\Livewire\CreatePost::class);
+Route::get('/editpost/{topic_id}/{topic_slug}', App\Http\Livewire\EditPost::class, 'topic_id','topic_slug');

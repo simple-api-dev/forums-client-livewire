@@ -11,13 +11,11 @@ class Comment extends Component
 
     use apiKeyInject;
     public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments;
-    
+
     public function destroyComment($comment_id)
     {
         $response = $this->injectApi()->delete(getenv('API_SITE') . '/comments/' . $comment_id);
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
+        session()->flash('message', $response['message']);
         return redirect('post/' . $this->topic_id);
     }
 

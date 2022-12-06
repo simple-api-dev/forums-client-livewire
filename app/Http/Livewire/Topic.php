@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class Topic extends Component
 {
     use apiKeyInject;
-    public $topic_id, $title, $body, $author_id, $topic_reports;
+    public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
     public string $score;
 
 
@@ -74,11 +74,13 @@ class Topic extends Component
     {
         $response = $this->injectApi()->get(getenv('API_SITE') . '/topics/' . $slug);
         $this->topic_id = $response['id'];
+        $this->topic_slug = $response['slug'];
         $this->score = $response['score'];
         $this->title = $response['title'];
         $this->body = $response['body'];
         $this->author_id = $response['author_id'];
         $this->topic_reports = $response['reports'];
+        $this->status = $response['status'];
     }
 
 

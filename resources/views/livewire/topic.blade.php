@@ -11,13 +11,17 @@
         </div>
 
         <div class="text-slate-400 flex-grow">
-            <a class="text-2xl text-black hover:text-blue-700" href="/post/{{$topic_id}}">{{ $title }}</a>
+            <a class="text-2xl text-black hover:text-blue-700" href="/post/{{ $topic_id }}">{{ $title }}</a>
             <br><span class="">{{ $body }}</span><br>
-            <span class="text-gray-300">Posted by {{ $author_id }}</span>
+            <span class="text-gray-300">Posted by {{ $author_id }} - [{{ $status }}]</span>
         </div>
-        <div><button wire:click="destroy({{ $topic_id }})" title="Delete"><i class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
+        <div><a href="/editpost/{{$topic_id}}/{{$topic_slug}}"><button title="Edit"><i class="fa fa-pen fa-1x p-5 text-gray-300"></i></button></a>
         </div>
-        <div><button wire:click="report({{ $topic_id }})" title="Report"><i class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
+        <div><button wire:click="destroy({{ $topic_id }})" title="Delete"><i
+                    class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
+        </div>
+        <div><button wire:click="report({{ $topic_id }})" title="Report"><i
+                    class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
         </div>
         <div><i class="fa fa-ban fa-1x p-5 text-gray-300"></i></div>
     </div>

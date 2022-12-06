@@ -14,9 +14,11 @@
             <br><span class="">{{ $body }}</span><br>
             <span class="text-gray-300">Posted by {{ $author_id }}</span>
         </div>
-        <div><button wire:click="destroyComment({{ $comment_id }})" title="Delete"><i class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
+        <div><button wire:click="destroyComment({{ $comment_id }})" title="Delete"><i
+                    class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
         </div>
-        <div><button wire:click="reportComment({{ $comment_id }})" title="Report"><i class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
+        <div><button wire:click="reportComment({{ $comment_id }})" title="Report"><i
+                    class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
         </div>
     </div>
     {{-- @if ($topic_reports)

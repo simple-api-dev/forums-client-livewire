@@ -1,6 +1,6 @@
 <div>
     <div class='p-5'>
-        <span class="text-3xl text-black font-bold">Forum Name</span>
+        <span class="text-3xl text-black font-bold">FORUM</span>
         @if (session()->has('message'))
             <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm">
                 {{ session('message') }}

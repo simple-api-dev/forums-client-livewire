@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Session;
 class Post extends Component
 {
     use apiKeyInject;
-    public $comments = [];
     public $topic_id = '';
+    public $comments = [];
     public $form = [
-        'comment' => 'aaa',
+        'comment' => 'aa',
     ];
 
     public function submit()
@@ -29,6 +29,7 @@ class Post extends Component
 
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment added successfully');
+            return redirect('post/' . $this->topic_id);
         } else {
             session()->flash('message', $response['message']);
         }
