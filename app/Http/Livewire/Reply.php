@@ -16,6 +16,12 @@ class Reply extends Component
         'commentoncomment' => 'ss',
     ];
 
+    public function destroyComment($comment_id)
+    {
+        $response = $this->injectApi()->delete(getenv('API_SITE') . '/comments/' . $comment_id);
+        session()->flash('message', $response['message']);
+        return redirect('post/' . $this->topic_id);
+    }
 
     public function submit()
     {

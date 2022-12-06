@@ -20,14 +20,5 @@
         <div><button wire:click="destroy({{ $topic_id }})" title="Delete"><i
                     class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
         </div>
-        <div><button wire:click="report({{ $topic_id }})" title="Report"><i
-                    class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
-        </div>
-        <div><i class="fa fa-ban fa-1x p-5 text-gray-300"></i></div>
     </div>
-    {{-- @if ($topic_reports)
-        @foreach ($topic_reports as $report)
-            @livewire('report', ['report' => $report])
-        @endforeach
-    @endif --}}
 </div>

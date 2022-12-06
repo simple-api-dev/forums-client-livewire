@@ -17,15 +17,44 @@
         <div><button wire:click="destroyComment({{ $comment_id }})" title="Delete"><i
                     class="fa fa-trash fa-1x p-5 text-gray-300"></i></button>
         </div>
-        <div><button wire:click="reportComment({{ $comment_id }})" title="Report"><i
-                    class="fa fa-flag fa-1x p-5 text-gray-300"></i></button>
+        <div><button type="button" wire:click="$toggle('showDiv')"><i class="fa fa-comment fa-1x p-5 text-gray-300"></i></button>
         </div>
     </div>
+    
 
-    @if ($comments)
+    @if ($showDiv)
+        <form class="my-4" wire:submit.prevent="submit">
+            <div class="flex flex-row">
+                <div class="bg-slate flex-grow p-2">
+                    <div class="flex justify-around my-8">
+                        <div class="flex flex-wrap w-10/12">
+                            <input type="hidden" wire:model="form.comment_id" />
+                            <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
+                                wire:model="form.commentoncomment" />
+                            @error('form.commentoncomment')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <input type="submit" value="Reply"
+                            class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endif
+
+    {{-- @include('livewire.commentsRecursive',['comments' => $comments]) --}}
+    @include('livewire.commentsRecursive', [
+        'topic_id' => $topic_id,
+        'comment_id' => $comment_id,
+        'comments' => $comments,
+    ])
+
+
+    {{-- @if ($comments)
         @foreach ($comments as $comment)
             @livewire('reply', ['topic_id' => $topic_id, 'comment' => $comment])
         @endforeach
-    @endif
+    @endif --}}
 
 </div>
