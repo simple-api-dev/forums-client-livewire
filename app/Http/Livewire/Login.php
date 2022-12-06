@@ -24,7 +24,7 @@ class Login extends Component
         ]);
 
         $response = HTTP::post(getenv('AUTH_SITE') . '/login/?apikey=' . getenv('AUTH_APIKEY'), [
-            'integration_id' => getenv('INTEGRATION_ID'),
+            'app_id' => getenv('APP_ID'),
             'email' => $this->form['email'],
             'password' => $this->form['password'],
         ]);

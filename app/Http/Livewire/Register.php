@@ -28,7 +28,7 @@ class Register extends Component
         ]);
 
         $response = $this->injectApi()->post(getenv('AUTH_SITE') . '/register', [
-            'integration_id' => getenv('INTEGRATION_ID'),
+            'app_id' => getenv('APP_ID'),
             'name' => $this->form['name'],
             'email' => $this->form['email'],
             'password' => $this->form['password'],

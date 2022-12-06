@@ -12,10 +12,6 @@ class Home extends Component
     public $topics = [];
     public $tags = [];
 
-
-
-
-    
     public function mount()
     {
         $this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/' . 'forum' . '/topics'));
@@ -25,6 +21,6 @@ class Home extends Component
 
     public function render()
     {
-        return view('livewire.home', ['topics' => $this->topics, 'tags' => $this->tags]);
+        return view('livewire.home');
     }
 }
