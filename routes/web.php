@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', App\Http\Livewire\Home::class)->name('home');
+Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id')->name('post');
 
-Route::get('upvoteTopic/{id}', App\Http\Livewire\Home::class);
-// Route::get('/downvoteTopic/{forum_id}/{forum_slug}/{id}', App\Http\Livewire\Home::class, 'forum_id', 'forum_slug', 'id');
 
 
 Route::get('/login', App\Http\Livewire\Login::class);

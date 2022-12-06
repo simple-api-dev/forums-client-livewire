@@ -1,6 +1,6 @@
 <div>
     <div class='p-5'>
-        <span class="text-3xl text-black font-bold">Forum Name</span>
+        <span class="text-3xl text-black font-bold">Post</span>
         @if (session()->has('message'))
             <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm">
                 {{ session('message') }}
@@ -15,7 +15,7 @@
         <div class="bg-slate flex-grow p-2">
             <a href="/createpost">
                 <div class="w-full border-2 border-black-100 bg-slate-100  hover:border-2 hover:border-blue-900">
-                    Add Topic</div>
+                    Add Comment</div>
             </a>
         </div>
         <div>
@@ -27,7 +27,7 @@
     <div class="h-5 bg-slate-300"></div>
 
 
-    @foreach ($topics as $topic)
-        @livewire('topic', ['slug' => $topic->slug])
+    @foreach ($comments as $comment)
+        @livewire('comment', ['comment_id' => $comment->id])
     @endforeach
 </div>

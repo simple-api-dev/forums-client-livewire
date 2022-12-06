@@ -7,10 +7,10 @@ use App\Traits\apiKeyInject;
 use Illuminate\Support\Facades\Session;
 
 
-class ShowTopic extends Component
+class Topic extends Component
 {
     use apiKeyInject;
-    public $topicid, $title, $body, $author_id, $topic_reports;
+    public $topic_id, $title, $body, $author_id, $topic_reports;
     public string $score;
 
 
@@ -73,7 +73,7 @@ class ShowTopic extends Component
     public function mount($slug)
     {
         $response = $this->injectApi()->get(getenv('API_SITE') . '/topics/' . $slug);
-        $this->topicid = $response['id'];
+        $this->topic_id = $response['id'];
         $this->score = $response['score'];
         $this->title = $response['title'];
         $this->body = $response['body'];
@@ -84,6 +84,6 @@ class ShowTopic extends Component
 
     public function render()
     {
-        return view('livewire.show-topic');
+        return view('livewire.topic');
     }
 }

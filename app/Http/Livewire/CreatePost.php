@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Traits\apiKeyInject;
+use Illuminate\Support\Facades\Session;
 
 
 class CreatePost extends Component
@@ -29,7 +30,6 @@ class CreatePost extends Component
             'form.body' => ['required'],
             'form.type' => ['required'],
             'form.status' => ['required'],
-            'form.author_id' => ['required']
         ]);
 
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/forums/17/topics', [
@@ -37,7 +37,7 @@ class CreatePost extends Component
             'body' => $this->form['body'],
             'status' => $this->form['status'],
             'type' => $this->form['type'],
-            'author_id' => $this->form['author_id'],
+            'author_id' => Session::get('author_id'),
             'tags' => [],
         ]));
 

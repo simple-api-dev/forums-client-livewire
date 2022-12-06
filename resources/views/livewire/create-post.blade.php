@@ -75,17 +75,6 @@
 
             <div class="flex justify-around my-8">
                 <div class="flex flex-wrap w-10/12">
-                    <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Author id"
-                        value="{{ Session::get('author_id') }}""
-                        wire:model="form.author_id" />
-                    @error('form.author_id')
-                        <span class="text-red-500 text-xs">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="flex justify-around my-8">
-                <div class="flex flex-wrap w-10/12">
                     <input type="submit" value="Save"
                         class="p-2 bg-gray-800 text-white w-full rounded tracking-wider cursor-pointer" />
                 </div>
