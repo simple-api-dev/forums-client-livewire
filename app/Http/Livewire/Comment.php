@@ -11,6 +11,31 @@ class Comment extends Component
 
     use apiKeyInject;
     public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments;
+    public $form = [
+        'commentoncomment' => 'aa',
+    ];
+
+
+    public function submit()
+    {
+        $this->validate([
+            'form.commentoncomment' => ['required', 'string', 'max:255'],
+        ]);
+
+        $response = $this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $this->comment_id, [
+            'body' => $this->form['commentoncomment'],
+            'status' => 'Active',
+            'author_id' =>  Session::get('author_id'),
+        ]);
+
+        if ($response->getStatusCode() == 200) {
+            session()->flash('message', 'Comment on Comment added successfully');
+            return redirect('post/' . $this->topic_id);
+        } else {
+            session()->flash('message', $response['message']);
+        }
+    }
+
 
     public function destroyComment($comment_id)
     {
