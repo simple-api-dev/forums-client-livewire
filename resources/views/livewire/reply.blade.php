@@ -22,10 +22,22 @@
         </div>
     </div>
 
-    @if ($comments)
-        @foreach ($comments as $comment)
-            @livewire('reply', ['comment' => $comment])
-        @endforeach
-    @endif
 
+    <form class="my-4" wire:submit.prevent="submit">
+        <div class="flex flex-row">
+            <div class="bg-slate flex-grow p-2">
+                <div class="flex justify-around my-8">
+                    <div class="flex flex-wrap w-10/12">
+                        <input type="text" class="p-2 rounded border shadow-sm" wire:model="form.comment_id" />
+                        <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
+                            wire:model="form.commentoncomment" />
+                        @error('form.commentoncomment')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <input type="submit" value="Save" class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
