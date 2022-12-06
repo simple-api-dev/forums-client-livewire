@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    
+
     <form class="my-4" wire:submit.prevent="submit">
         <div class="flex flex-row">
             <div class="bg-slate flex-grow p-2">
@@ -30,7 +30,7 @@
                     <div class="flex flex-wrap w-10/12">
                         <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
                             wire:model="form.commentoncomment" />
-                        @error('form.comment')
+                        @error('form.commentoncomment')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
@@ -39,4 +39,9 @@
             </div>
         </div>
     </form>
+
+    @foreach ($comments as $comment)
+        {{$comment['id']}} 
+        {{-- @livewire('CommentOnComment', ['comment_id' => $comment_id]) --}}
+    @endforeach
 </div>

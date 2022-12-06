@@ -12,7 +12,7 @@ class Comment extends Component
     use apiKeyInject;
     public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments;
     public $form = [
-        'commentoncomment' => 'aa',
+        'commentoncomment' => 'ss',
     ];
 
 
