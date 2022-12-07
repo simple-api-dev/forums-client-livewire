@@ -11,19 +11,19 @@ class Post extends Component
     use apiKeyInject;
     public $topic_id = '';
     public $comments = [];
-    public $form = [
-        'comment' => 'a',
+    public $formz = [
+        'comment' => 'AA',
     ];
 
 
     public function submit()
     {
         $this->validate([
-            'form.comment' => ['required', 'string', 'max:255'],
+            'formz.comment' => ['required', 'string', 'max:255'],
         ]);
 
         $response = $this->injectApi()->post(getenv('API_SITE') . '/comments/type/topic/' . $this->topic_id, [
-            'body' => $this->form['comment'],
+            'body' => $this->formz['comment'],
             'status' => 'Active',
             'author_id' =>  Session::get('author_id'),
         ]);
@@ -31,7 +31,7 @@ class Post extends Component
 
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment added successfully');
-            return redirect('post/' . $this->topic_id);
+            // return redirect('post/' . $this->topic_id);
         } else {
             session()->flash('message', $response['message']);
         }

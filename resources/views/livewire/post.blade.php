@@ -14,8 +14,8 @@
                 <div class="flex justify-around my-8">
                     <div class="flex flex-wrap w-10/12">
                         <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
-                            wire:model="form.comment" />
-                        @error('form.comment')
+                            wire:model="formz.comment" />
+                        @error('formz.comment')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
