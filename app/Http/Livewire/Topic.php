@@ -5,18 +5,22 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Traits\apiKeyInject;
 use Illuminate\Support\Facades\Session;
-
+use stdClass;
 
 class Topic extends Component
 {
     use apiKeyInject;
-    public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
-    public string $score;
+    public  $topic;
+    
 
-    public function showpost()
-    {
-        return redirect()->to('/post/' . $this->topic_id);
-    }
+
+    // public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
+    // public string $score;
+
+    // public function showpost()
+    // {
+    //     return redirect()->to('/post/' . $this->topic_id);
+    // }
 
 
     public function destroy($id)
@@ -60,17 +64,9 @@ class Topic extends Component
     }
 
 
-    public function mount($slug)
+    public function mount($topic)
     {
-        $response = $this->injectApi()->get(getenv('API_SITE') . '/topics/' . $slug);
-        $this->topic_id = $response['id'];
-        $this->topic_slug = $response['slug'];
-        $this->score = $response['score'];
-        $this->title = $response['title'];
-        $this->body = $response['body'];
-        $this->author_id = $response['author_id'];
-        $this->topic_reports = $response['reports'];
-        $this->status = $response['status'];
+        $this->topic =  (array) $topic;
     }
 
 

@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Livewire\Home::class)->name('home');
-Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id');
+Route::get('/', App\Http\Livewire\Topics::class);
 
+Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id');
 Route::get('/login', App\Http\Livewire\Login::class);
 Route::get('/logout', App\Http\Livewire\Logout::class);
 Route::get('/register', App\Http\Livewire\Register::class);
