@@ -7,7 +7,7 @@
     @endif
 
     <div class="m-10">
-        <form class="my-4" wire:submit.prevent="createpost">
+        <form class="my-4" wire:submit.prevent="addTopic">
             <input type="submit" value="Add Topic" class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
         </form>
     </div>

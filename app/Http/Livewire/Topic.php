@@ -17,10 +17,10 @@ class Topic extends Component
     // public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
     // public string $score;
 
-    // public function showpost()
-    // {
-    //     return redirect()->to('/post/' . $this->topic_id);
-    // }
+    public function showpost()
+    {
+        return redirect()->to('/post/' . $this->topic_id);
+    }
 
 
     public function destroy($id)
