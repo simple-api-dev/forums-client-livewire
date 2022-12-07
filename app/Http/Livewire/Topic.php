@@ -13,6 +13,11 @@ class Topic extends Component
     public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
     public string $score;
 
+    public function showpost()
+    {
+        return redirect()->to('/post/' . $this->topic_id);
+    }
+
 
     public function destroy($id)
     {
@@ -20,23 +25,7 @@ class Topic extends Component
         if ($response->getStatusCode() <> 200) {
             session()->flash('message', $response['message']);
         }
-        return redirect(route('home'));
-    }
-
-
-    public function report($id)
-    {
-        $response = $this->injectApi()->post(
-            getenv('API_SITE') . '/reports/type/topic/' . $id,
-            [
-                'author_id' => Session::get('author_id'),
-                'type' => 'Offensive'
-            ]
-        );
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
-        return redirect(route('home'));
+        return redirect()->to('/');
     }
 
 

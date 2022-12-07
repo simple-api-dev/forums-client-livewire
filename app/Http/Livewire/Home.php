@@ -12,6 +12,12 @@ class Home extends Component
     public $topics = [];
     public $tags = [];
 
+    public function createpost()
+    {
+        return redirect()->to('/createpost');
+    }
+
+
     public function mount()
     {
         $this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/' . 'forum' . '/topics'));

@@ -11,7 +11,12 @@
         </div>
 
         <div class="text-slate-400 flex-grow">
-            <a class="text-2xl text-black hover:text-blue-700" href="/post/{{ $topic_id }}">{{ $title }}</a>
+            {{-- <a class="text-2xl text-black hover:text-blue-700" href="/post/{{ $topic_id }}">{{ $title }}</a> --}}
+
+            <form class="my-4" wire:submit.prevent="showpost">
+                <input type="submit" value="{{ $title }}" class="text-2xl text-black hover:text-blue-700" />
+            </form>
+
             <br><span class="">{{ $body }}</span><br>
             <span class="text-gray-300">Posted by {{ $author_id }} - [{{ $status }}]</span>
         </div>

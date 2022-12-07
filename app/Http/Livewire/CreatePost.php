@@ -45,9 +45,20 @@ class CreatePost extends Component
             session()->flash('message', $response->message);
         } else {
             session()->flash('message', 'New topic created');
-            return redirect(route('home'));
+            return redirect()->to('/');
         }
     }
+
+
+    public function mount()
+    {
+        $response = $this->injectApi()->get(getenv('API_SITE') . '/forums/17/tags');
+        if (isset($response->message)) {
+            session()->flash('message', $response->message);
+        } else {
+            $this->form['tags'] = json_decode($response);
+        }
+    }    
 
 
     public function render()

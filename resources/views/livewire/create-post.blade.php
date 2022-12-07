@@ -58,20 +58,20 @@
                 </div>
             </div>
 
-            @if (!empty($tags))
+            {{-- @if (!empty($form['tags']))
                 <div class="flex justify-around my-8">
                     <div class="flex flex-wrap w-10/12">
                         <label class="font-extrabold" for="type">Tags</label>
                         <div>
-                            <select name="tags[]" id="tags" multiple wire:model="form.tags">
-                                @foreach ($tags as $key => $tag)
+                            <select multiple wire:model="form.tags">
+                                @foreach ($form['tags'] as $tag)
                                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
 
             <div class="flex justify-around my-8">
                 <div class="flex flex-wrap w-10/12">

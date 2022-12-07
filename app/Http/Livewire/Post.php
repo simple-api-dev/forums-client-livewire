@@ -12,11 +12,11 @@ class Post extends Component
     public $topic_id = '';
     public $comments = [];
     public $formz = [
-        'comment' => 'AA',
+        'comment' => "AAA",
     ];
 
 
-    public function submit()
+    public function submitComment()
     {
         $this->validate([
             'formz.comment' => ['required', 'string', 'max:255'],
@@ -31,7 +31,7 @@ class Post extends Component
 
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment added successfully');
-            // return redirect('post/' . $this->topic_id);
+            return redirect()->to('post/' . $this->topic_id);
         } else {
             session()->flash('message', $response['message']);
         }

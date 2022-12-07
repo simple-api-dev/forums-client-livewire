@@ -37,7 +37,7 @@ class EditPost extends Component
             session()->flash('message', $response->message);
         } else {
             session()->flash('message', 'Topic updated');
-            return redirect(route('home'));
+            return redirect()->to('/');
         }
     }
 

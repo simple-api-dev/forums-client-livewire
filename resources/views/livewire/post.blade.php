@@ -8,13 +8,13 @@
         @endif
     </div>
 
-    <form class="my-4" wire:submit.prevent="submit">
+    <form class="my-4" wire:submit.prevent="submitComment">
         <div class="flex flex-row">
             <div class="bg-slate flex-grow p-2">
                 <div class="flex justify-around my-8">
                     <div class="flex flex-wrap w-10/12">
                         <input type="text" class="p-2 rounded border shadow-sm w-full" placeholder="Add Comment"
-                            wire:model="formz.comment" />
+                            wire:model="formz.comment"/>
                         @error('formz.comment')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
@@ -30,5 +30,8 @@
 
     @foreach ($comments as $comment)
         @livewire('comment', ['topic_id' => $topic_id, 'comment_id' => $comment->id])
+        
+        {{-- @livewire('comment', ['topic_id' => $topic_id, 'comment_id' => $comment->id, 'comment'=>$comment], key('$comment->id')) --}}
+        {{-- <livewire:comment :topic_id="$topic_id" :comment_id="$comment->id" :comment='$comment' :wire:key="$comment->id"> --}}
     @endforeach
 </div>

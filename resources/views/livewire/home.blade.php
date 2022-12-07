@@ -10,10 +10,9 @@
 
     <div class="flex flex-row">
         <div class="bg-slate flex-grow p-2">
-            <a href="/createpost">
-                <div class="w-full border-2 border-black-100 bg-slate-100  hover:border-2 hover:border-blue-900">
-                    Add Topic</div>
-            </a>
+            <form class="my-4" wire:submit.prevent="createpost">
+                <input type="submit" value="Add Topic" class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
+            </form>
         </div>
     </div>
 

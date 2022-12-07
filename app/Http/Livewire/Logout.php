@@ -13,7 +13,7 @@ class Logout extends Component
         Http::post(getenv('AUTH_SITE') . '/logout/?apikey=' . getenv('AUTH_APIKEY'), ['token' => session()->get('key'),]);
         session()->flush();
         session()->regenerate();
-        return redirect(route('home'));
+        return redirect()->to('/');
     }
 
     public function render()

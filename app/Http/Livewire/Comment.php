@@ -10,14 +10,14 @@ class Comment extends Component
 {
 
     use apiKeyInject;
-    public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments, $commentable_type;
+    public $topid_id, $comment_id, $body, $status, $author_id, $score, $comments, $commentable_type;
     public $showDiv = false;
     public $form = [
         'comment_id' => '',
         'commentoncomment' => '',
     ];
 
-
+  
     public function submit()
     {
         $this->validate([
@@ -32,7 +32,7 @@ class Comment extends Component
 
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment on Comment added successfully');
-            return redirect('post/' . $this->topic_id);
+            return redirect()->to('post/' . $this->topic_id);
         } else {
             session()->flash('message', $response['message']);
         }
@@ -43,24 +43,9 @@ class Comment extends Component
     {
         $response = $this->injectApi()->delete(getenv('API_SITE') . '/comments/' . $comment_id);
         session()->flash('message', $response['message']);
-        return redirect('post/' . $this->topic_id);
+        return redirect()->to('post/' . $this->topic_id);
     }
 
-
-    public function reportComment($comment_id)
-    {
-        $response = $this->injectApi()->post(
-            getenv('API_SITE') . '/reports/type/comment/' . $comment_id,
-            [
-                'author_id' => Session::get('author_id'),
-                'type' => 'Offensive'
-            ]
-        );
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
-        return redirect('post/' . $this->topic_id);
-    }
 
 
     public function upvoteComment($comment_id)
@@ -101,7 +86,6 @@ class Comment extends Component
         $this->body = $response['body'];
         $this->status = $response['status'];
         $this->author_id = $response['author_id'];
-        $this->reports = $response['reports'];
         $this->score = $response['score'];
         $this->comments = $response['comments'];
         $this->commentable_type = $response['commentable_type'];

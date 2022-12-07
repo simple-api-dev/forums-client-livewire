@@ -33,7 +33,7 @@ class Login extends Component
             session()->regenerate();
             session()->put('token', $response['token']);
             session()->put('author_id', $response['username']);
-            return redirect(route('home'));
+            return redirect()->to('/');
         } else {
             session()->flash('message', $response['message']);
         }
