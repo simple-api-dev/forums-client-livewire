@@ -11,17 +11,18 @@ class Topics extends Component
     use apiKeyInject;
 
     public $topics;
+    protected $listeners = ['$refresh', 'destroyTopic'];
 
 
     public function addTopic()
     {
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/forums/17/topics', [
-            'title' => 'title',
-            'body' => 'body',
+            'title' => 'Topic',
+            'body' => 'Topic Body',
             'status' => 'Active',
             'type' => 'Post',
             'author_id' => Session::get('author_id'),
-            'tags' => [],
+            'tags' => ['red','blue','green'],
         ]));
 
         array_push(
@@ -41,8 +42,14 @@ class Topics extends Component
                 'score' => $response->score,
             )
         );
+        $this->emit('$refresh');
     }
 
+    public function destroyTopic($params)
+    {
+        $this->injectApi()->delete(getenv('API_SITE') . '/topics/' . $params['id']);
+        dd($this->topics);
+    }
 
     public function mount()
     {
@@ -52,6 +59,7 @@ class Topics extends Component
 
     public function render()
     {
+        //$this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'));
         return view('livewire.topics');
     }
 }

@@ -11,25 +11,12 @@ class Topic extends Component
 {
     use apiKeyInject;
     public  $topic;
+    public $url;
+
     
-
-
-    // public $topic_id, $topic_slug, $title, $body, $author_id, $topic_reports, $status;
-    // public string $score;
-
-    public function showpost()
-    {
-        return redirect()->to('/post/' . $this->topic_id);
-    }
-
-
     public function destroy($id)
     {
-        $response = $this->injectApi()->delete(getenv('API_SITE') . '/topics/' . $id);
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
-        return redirect()->to('/');
+        $this->emitUp('destroyTopic', ['id' => $id]);
     }
 
 
@@ -39,13 +26,10 @@ class Topic extends Component
             'author_id' =>  Session::get('author_id'),
         ]);
 
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
-
         if (isset($response['points'])) {
             $this->score = $response['points'];
         }
+        $this->emit('$refresh');
     }
 
 
@@ -54,19 +38,17 @@ class Topic extends Component
         $response = $this->injectApi()->post(getenv('API_SITE') . '/votes/down/topic/' . $id, [
             'author_id' =>  Session::get('author_id'),
         ]);
-        if ($response->getStatusCode() <> 200) {
-            session()->flash('message', $response['message']);
-        }
-
         if (isset($response['points'])) {
             $this->score = $response['points'];
         }
+        $this->emit('$refresh');
     }
 
 
     public function mount($topic)
     {
-        $this->topic =  (array) $topic;
+        $this->topic = (array) $topic;
+        $this->url = url()->current();
     }
 
 

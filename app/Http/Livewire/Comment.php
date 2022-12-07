@@ -10,7 +10,7 @@ class Comment extends Component
 {
 
     use apiKeyInject;
-    public $topid_id, $comment_id, $body, $status, $author_id, $score, $comments, $commentable_type;
+    public $topid_id, $comment;
     public $showDiv = false;
     public $form = [
         'comment_id' => '',
@@ -78,18 +78,10 @@ class Comment extends Component
     }
 
 
-    public function mount($topic_id, $comment_id)
+    public function mount($topic_id, $comment)
     {
-        $response = $this->injectApi()->get(getenv('API_SITE') . '/comments/' . $comment_id);
+        $response = $this->injectApi()->get(getenv('API_SITE') . '/comments/' . $comment->id);
         $this->topic_id = $topic_id;
-        $this->comment_id = $comment_id;
-        $this->body = $response['body'];
-        $this->status = $response['status'];
-        $this->author_id = $response['author_id'];
-        $this->score = $response['score'];
-        $this->comments = $response['comments'];
-        $this->commentable_type = $response['commentable_type'];
-        $this->form['comment_id'] = $comment_id;
     }
 
 

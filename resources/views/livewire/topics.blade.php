@@ -13,6 +13,7 @@
     </div>
 
     @foreach ($topics as $topic)
-        @livewire("topic", ['topic' => $topic])
+        {{-- @livewire("topic", ['topic' => $topic, 'key' => Str::random(6)]) --}}
+        <livewire:topic  :topic="$topic" :wire:key="$loop->index"/>
     @endforeach
 </div>
