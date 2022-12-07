@@ -10,16 +10,12 @@ use stdClass;
 class Topic extends Component
 {
     use apiKeyInject;
+    protected $listeners = ['$refresh'];
+
     public  $topic;
     public $url;
 
     
-    public function destroy($id)
-    {
-        $this->emitUp('destroyTopic', ['id' => $id]);
-    }
-
-
     public function upvoteTopic($id)
     {
         $response = $this->injectApi()->post(getenv('API_SITE') . '/votes/up/topic/' . $id, [

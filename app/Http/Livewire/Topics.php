@@ -25,31 +25,10 @@ class Topics extends Component
             'tags' => ['red','blue','green'],
         ]));
 
-        array_push(
-            $this->topics,
-            array(
-                'id' => $response->id,
-                'forum_id' => $response->forum_id,
-                'title' => $response->title,
-                'slug' => $response->slug,
-                'body' => $response->body,
-                'url' => '',   //url
-                'type' => $response->type,
-                'status' => $response->status,
-                'author_id' => $response->author_id,
-                'tag_names' => $response->tag_names,
-                'reports' => $response->reports,
-                'score' => $response->score,
-            )
-        );
+        array_push($this->topics, $response);
         $this->emit('$refresh');
     }
 
-    public function destroyTopic($params)
-    {
-        $this->injectApi()->delete(getenv('API_SITE') . '/topics/' . $params['id']);
-        dd($this->topics);
-    }
 
     public function mount()
     {
@@ -59,7 +38,6 @@ class Topics extends Component
 
     public function render()
     {
-        //$this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'));
         return view('livewire.topics');
     }
 }
