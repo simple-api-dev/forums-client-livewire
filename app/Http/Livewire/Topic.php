@@ -45,6 +45,7 @@ class Topic extends Component
         $response = $this->injectApi()->post(getenv('API_SITE') . '/votes/up/topic/' . $id, [
             'author_id' =>  Session::get('author_id'),
         ]);
+
         if ($response->getStatusCode() <> 200) {
             session()->flash('message', $response['message']);
         }

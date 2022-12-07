@@ -10,13 +10,13 @@ class Comment extends Component
 {
 
     use apiKeyInject;
-    public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments;
+    public $topid_id, $comment_id, $body, $status, $author_id, $reports, $score, $comments, $commentable_type;
     public $showDiv = false;
-
     public $form = [
         'comment_id' => '',
-        'commentoncomment' => 'ss',
+        'commentoncomment' => '',
     ];
+
 
     public function submit()
     {
@@ -37,6 +37,7 @@ class Comment extends Component
             session()->flash('message', $response['message']);
         }
     }
+
 
     public function destroyComment($comment_id)
     {
@@ -103,9 +104,9 @@ class Comment extends Component
         $this->reports = $response['reports'];
         $this->score = $response['score'];
         $this->comments = $response['comments'];
+        $this->commentable_type = $response['commentable_type'];
         $this->form['comment_id'] = $comment_id;
     }
-
 
 
     public function render()

@@ -19,7 +19,8 @@
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
-                    <input type="submit" value="Post Comment" class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
+                    <input type="submit" value="Post Comment"
+                        class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" />
                 </div>
             </div>
         </div>

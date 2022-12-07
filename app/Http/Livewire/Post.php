@@ -12,8 +12,9 @@ class Post extends Component
     public $topic_id = '';
     public $comments = [];
     public $form = [
-        'comment' => 'aa',
+        'comment' => 'a',
     ];
+
 
     public function submit()
     {
@@ -27,6 +28,7 @@ class Post extends Component
             'author_id' =>  Session::get('author_id'),
         ]);
 
+
         if ($response->getStatusCode() == 200) {
             session()->flash('message', 'Comment added successfully');
             return redirect('post/' . $this->topic_id);
@@ -34,6 +36,7 @@ class Post extends Component
             session()->flash('message', $response['message']);
         }
     }
+
 
     public function mount($topic_id)
     {
