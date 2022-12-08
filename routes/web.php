@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', App\Http\Livewire\Topics::class);
+Route::get('/comments/{topic_id}', App\Http\Livewire\Comments::class, 'topic_id');
 
 Route::get('/post/{topic_id}', App\Http\Livewire\Post::class, 'topic_id');
 Route::get('/login', App\Http\Livewire\Login::class);

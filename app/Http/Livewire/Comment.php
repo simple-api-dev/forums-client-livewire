@@ -11,31 +11,27 @@ class Comment extends Component
 
     use apiKeyInject;
     public $topid_id, $comment;
+    protected $listeners = ['$refresh'];
+
     public $showDiv = false;
     public $form = [
         'comment_id' => '',
-        'commentoncomment' => '',
+        'body' => '',
     ];
 
   
-    public function submit()
+    public function addComment($comment_id)
     {
         $this->validate([
-            'form.commentoncomment' => ['required', 'string', 'max:255'],
+            'form.body' => ['required', 'string', 'max:255'],
         ]);
 
-        $response = $this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $this->form['comment_id'], [
-            'body' => $this->form['commentoncomment'],
+        $response = $this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $comment_id, [
+            'body' => $this->form['body'],
             'status' => 'Active',
             'author_id' =>  Session::get('author_id'),
         ]);
-
-        if ($response->getStatusCode() == 200) {
-            session()->flash('message', 'Comment on Comment added successfully');
-            return redirect()->to('post/' . $this->topic_id);
-        } else {
-            session()->flash('message', $response['message']);
-        }
+        $this->emit('$refresh');
     }
 
 
@@ -80,8 +76,8 @@ class Comment extends Component
 
     public function mount($topic_id, $comment)
     {
-        $response = $this->injectApi()->get(getenv('API_SITE') . '/comments/' . $comment->id);
         $this->topic_id = $topic_id;
+        $this->comment = json_decode(json_encode ( $comment ) , true);
     }
 
 

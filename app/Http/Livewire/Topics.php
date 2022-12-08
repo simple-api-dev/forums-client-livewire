@@ -11,21 +11,29 @@ class Topics extends Component
     use apiKeyInject;
 
     public $topics;
-    protected $listeners = ['$refresh', 'destroyTopic'];
+    public $form = [
+        'title' => '',
+    ];
+    protected $listeners = ['$refresh'];
 
 
     public function addTopic()
     {
+        $this->validate([
+            'form.title' => ['required', 'string', 'max:255'],
+        ]);
+
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/forums/17/topics', [
-            'title' => 'Topic',
-            'body' => 'Topic Body',
+            'title' => $this->form['title'],
+            'body' => 'Body',
             'status' => 'Active',
             'type' => 'Post',
             'author_id' => Session::get('author_id'),
-            'tags' => ['red','blue','green'],
+            'tags' => ['red', 'blue', 'green'],
         ]));
 
         array_push($this->topics, $response);
+        $this->form['title'] = '';
         $this->emit('$refresh');
     }
 
