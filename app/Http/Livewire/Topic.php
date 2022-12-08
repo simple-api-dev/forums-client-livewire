@@ -11,12 +11,37 @@ class Topic extends Component
     use apiKeyInject;
     public  $topic;
 
+    public $form = [
+        'body' => '',
+    ];
+    public $form2 = [
+        'body' => '',
+    ];
+    protected $listeners = ['$refresh'];
+
+
+    public function addComment($id)
+    {
+        $this->validate([
+            'form.body' => ['required', 'string', 'max:255'],
+        ]);
+
+        $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/comments/type/topic/' . $id, [
+            'body' => $this->form['body'],
+            'status' => 'Active',
+            'author_id' =>  Session::get('author_id'),
+        ]), true);
+         array_push($this->topic['comments'], $response);
+         session()->flash('message', 'Comment successfully added.');
+         $this->form['body'] = '';
+    }
+
 
     public function upvoteTopic($id)
     {
-        $response = $this->injectApi()->post(getenv('API_SITE') . '/votes/up/topic/' . $id, [
+        $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/votes/up/topic/' . $id, [
             'author_id' =>  Session::get('author_id'),
-        ]);
+        ]),true);
         if (isset($response['points'])) {
             $this->topic['score'] = $response['points'];
         }
@@ -25,18 +50,18 @@ class Topic extends Component
 
     public function downvoteTopic($id)
     {
-        $response = $this->injectApi()->post(getenv('API_SITE') . '/votes/down/topic/' . $id, [
+        $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/votes/down/topic/' . $id, [
             'author_id' =>  Session::get('author_id'),
-        ]);
+        ]),true);
         if (isset($response['points'])) {
             $this->topic['score'] = $response['points'];
         }
     }
 
 
-    public function mount($topic)
+    public function mount($topic_slug)
     {
-        $this->topic = (array) $topic;
+        $this->topic = json_decode($this->injectApi()->get(getenv('API_SITE') . '/topics/' . $topic_slug), true);
     }
 
 

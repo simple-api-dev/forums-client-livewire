@@ -1,13 +1,10 @@
 <div>
-    <div>Forum:Topics</div>
-    @if (session()->has('message'))
-        <div class="alert alert-success bg-green-300">
-            {{ session('message') }}
-        </div>
-    @endif
+    <div>
+        <div>Forum:Topics</div>
+    </div>
     <div class="flex flex-row">
         <div>
-            <input type="text" class="rounded border-spacing-2" placeholder="Topic Title" wire:model="form.title" />
+            <input type="text" class="rounded border-spacing-2" placeholder="Topic title" wire:model="form.title" />
             @error('form.title')
                 <span class="text-red-500 text-xs">{{ $message }}</span>
             @enderror
@@ -16,8 +13,8 @@
             <button class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer" wire:click="addTopic">Add Topic</button>
         </div>
     </div>
-
+    
     @foreach ($topics as $topic)
-        <livewire:topic :topic="$topic" :wire:key="$loop->index . rand()" />
+        <div class="ml-5"><a href="/topic/{{ $topic['slug'] }}">{{ $topic['title'] }}</a></div>
     @endforeach
 </div>

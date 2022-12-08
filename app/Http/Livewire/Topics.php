@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Session;
 class Topics extends Component
 {
     use apiKeyInject;
-
     public $topics;
+
+
     public $form = [
         'title' => '',
     ];
@@ -29,17 +30,17 @@ class Topics extends Component
             'type' => 'Post',
             'author_id' => Session::get('author_id'),
             'tags' => ['red', 'blue', 'green'],
-        ]));
+        ]), true);
 
         array_push($this->topics, $response);
         session()->flash('message', 'Topic successfully added.');
         $this->form['title'] = '';
     }
-
-
+    
+    
     public function mount()
     {
-        $this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'));
+       $this->topics = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'), true);
     }
 
 
