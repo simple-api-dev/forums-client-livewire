@@ -13,6 +13,7 @@ class Comments extends Component
     public $form = [
         'body' => '',
     ];
+    protected $listeners = ['$refresh'];
 
 
     public function addTopicComment()
@@ -29,7 +30,9 @@ class Comments extends Component
 
          $response = (array) $response;
          array_push($this->comments, $response);
-         dd($this->comments);
+         session()->flash('message', 'Comment successfully added.');
+
+        // dd($this->comments);
         //  COMMENTS is missing from response
     }
 

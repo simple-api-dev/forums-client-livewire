@@ -1,5 +1,10 @@
 <div>
     <div>Forum:Topics</div>
+    @if (session()->has('message'))
+        <div class="alert alert-success bg-green-300">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="flex flex-row">
         <div>
             <input type="text" class="rounded border-spacing-2" placeholder="Topic Title" wire:model="form.title" />

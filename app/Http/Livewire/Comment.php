@@ -26,12 +26,16 @@ class Comment extends Component
             'form.body' => ['required', 'string', 'max:255'],
         ]);
 
-        $response = $this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $comment_id, [
+        $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $comment_id, [
             'body' => $this->form['body'],
             'status' => 'Active',
             'author_id' =>  Session::get('author_id'),
-        ]);
-        $this->emit('$refresh');
+        ]));
+
+        $response = (array) $response;
+        array_push($this->comment, $response);
+        session()->flash('message', 'Comment successfully added.');
+        $this->emitUp('$refresh');
     }
 
 

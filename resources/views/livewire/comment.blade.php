@@ -40,7 +40,7 @@
             </div>
             <div>
                 <button class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer"
-                    wire:click="addComment({{ $comment['id'] }})">Add Comment</button>
+                    wire:click="addComment({{ $comment['id'] }})">Reply</button>
             </div>
         </div>
     @endif

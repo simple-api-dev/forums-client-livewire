@@ -14,9 +14,8 @@ class Topics extends Component
     public $form = [
         'title' => '',
     ];
-    protected $listeners = ['$refresh'];
 
-
+    
     public function addTopic()
     {
         $this->validate([
@@ -33,8 +32,8 @@ class Topics extends Component
         ]));
 
         array_push($this->topics, $response);
+        session()->flash('message', 'Topic successfully added.');
         $this->form['title'] = '';
-        $this->emit('$refresh');
     }
 
 
