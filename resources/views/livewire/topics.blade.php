@@ -98,7 +98,7 @@ Topic list
                             <br />
                             <span class="text-gray-400">Posted by {{ $topic['author_id'] }} 2 months ago</span>
                         </div>
-                        <div class="p-2 text-gray-400 hover:text-black"><i class="fa fa-comment fa-1x"></i></div>
+                        <div class="p-2 text-gray-400 hover:text-black"><a href="/topic/{{ $topic['slug'] }}"><i class="fa fa-comment fa-1x"></a></i></div>
                         <div class="p-2 text-gray-400 hover:text-red-800"><i class="fa fa-flag fa-1x"></i></div>
                         <div class="p-2 text-3xl">
                             <span class=" hover:bg-slate-100">...</span>
@@ -111,7 +111,7 @@ Topic list
                 <div class="w bg-slate-200">
                     <div class="ml-5 w-64 rounded-lg bg-white p-3 text-xs">
                         Your personal Reddit frontpage. Come here to check in with your favorite communities.
-                        <button
+                        <button  wire:click="$toggle('showDiv')"
                             class="m-2 w-56 rounded-lg bg-blue-600 p-1 text-sm font-medium text-white hover:bg-blue-400">Create
                             Topic</button>
                     </div>
