@@ -14,6 +14,7 @@ class Comment extends Component
         'body' => '',
     ];
     protected $listeners = ['$refresh'];
+    public $showDiv = false;
 
 
     public function addComment($comment_id)
