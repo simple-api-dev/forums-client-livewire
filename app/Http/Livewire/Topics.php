@@ -14,10 +14,10 @@ class Topics extends Component
         'title' => '',
         'body' => '',
         'url' => '',
-        'type' => '',
-        'status' => '',
+        'type' => 'Post',
+        'status' => 'Active',
     ];
-
+    public $showDiv = false;
 
     public function addTopic()
     {
@@ -31,21 +31,22 @@ class Topics extends Component
             'body' => $this->form['body'],
             'status' => $this->form['status'],
             'type' => $this->form['type'],
-            'url' => $this->form['url'],
             'author_id' => Session::get('author_id'),
             'tags' => ['red', 'blue', 'green'],
         ]), true);
 
-        dd($response);
-
         array_push($this->topics, $response);
         session()->flash('message', 'Topic successfully added.');
         $this->form['title'] = '';
+        $this->form['body'] = '';
+        $this->form['url'] = '';
+        $this->showDiv = false;
     }
 
 
     public function mount()
     {
+
         $response = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'), true);
         $this->topics = $response;
     }
