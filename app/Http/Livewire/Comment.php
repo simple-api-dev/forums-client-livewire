@@ -13,8 +13,6 @@ class Comment extends Component
     public $form = [
         'body' => '',
     ];
-    public $showDiv = false;
-
     protected $listeners = ['$refresh'];
 
 
@@ -29,20 +27,9 @@ class Comment extends Component
             'status' => 'Active',
             'author_id' =>  Session::get('author_id'),
         ]), true);
-
-        //array_push($this->comments, $response);
+        array_push($this->comment["comments"], $response);
         session()->flash('message', 'Comment successfully added.');
-        $this->emitUp('$refresh');
     }
-
-
-    public function destroyComment($comment_id)
-    {
-        $response = $this->injectApi()->delete(getenv('API_SITE') . '/comments/' . $comment_id);
-        session()->flash('message', $response['message']);
-        return redirect()->to('post/' . $this->topic_id);
-    }
-
 
 
     public function upvoteComment($comment_id)
@@ -81,7 +68,6 @@ class Comment extends Component
     {
         $this->topic_id = $topic_id;
         $this->comment = $comment;
-        // $this->comment =  json_decode($this->injectApi()->get(getenv('API_SITE') . '/topics/' . $topic_id . '/comments'), true);
     }
 
 

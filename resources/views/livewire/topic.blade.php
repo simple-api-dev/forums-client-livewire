@@ -1,7 +1,12 @@
 <div>
-    <a href="/"> Back to Topics </a>
+    @if (session()->has('message'))
+        <div class="alert alert-success bg-green-300">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div class="flex flex-row m-5 border-2">
-       <input type="text" class="rounded border-spacing-2" placeholder="Add Comment" wire:model="form.body" />
+        <input type="text" class="rounded border-spacing-2" placeholder="Add Comment" wire:model="form.body" />
         @error('form.body')
             <span class="text-red-500 text-xs">{{ $message }}</span>
         @enderror
@@ -32,7 +37,6 @@
     </div>
 
     @foreach ($topic['comments'] as $comment)
-        <livewire:comment :topic_id="$topic_id" :comment="$comment" :wire:key="$comment['id'] . rand()" />
+        <livewire:comment :topic_id="$topic['id']" :comment="$comment" :wire:key="$comment['id'] . rand()" />
     @endforeach
-
 </div>

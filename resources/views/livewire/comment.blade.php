@@ -1,4 +1,11 @@
 <div class="ml-2 bg-slate-100 py-1 px-1">
+
+    @if (session()->has('message'))
+        <div class="alert alert-success bg-green-300">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div class="flex flex-row">
         <div class="w-10">
             <button wire:click="upvoteComment({{ $comment['id'] }})" title="Upvote"><i
@@ -18,23 +25,18 @@
         </div>
         <div class="flex flex-row m-5 border-2">
             <input type="text" class="rounded border-spacing-2" placeholder="Add Comment" wire:model="form.body" />
-             @error('form.body')
-                 <span class="text-red-500 text-xs">{{ $message }}</span>
-             @enderror
-             <button class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer"
-                 wire:click="addComment({{ $comment['id'] }})">Reply</button>
-         </div>
+            @error('form.body')
+                <span class="text-red-500 text-xs">{{ $message }}</span>
+            @enderror
+            <button class="p-2 bg-blue-800 text-white rounded-lg cursor-pointer"
+                wire:click="addComment({{ $comment['id'] }})">Reply</button>
+        </div>
     </div>
 
-    
-    
+
     <div class="ml-2 py-1 px-1">
-        @foreach ($comment["comments"] as $comment)
-            <livewire:comment :topic_id="$topic_id" :comment="$comment" :wire:key="$comment['id'] . rand()"/>
+        @foreach ($comment['comments'] as $comment)
+            <livewire:comment :topic_id="$topic_id" :comment="$comment" :wire:key="$comment['id'] . rand()" />
         @endforeach
     </div>
 </div>
-
-
-
-

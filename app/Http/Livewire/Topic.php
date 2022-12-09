@@ -10,14 +10,9 @@ class Topic extends Component
 {
     use apiKeyInject;
     public  $topic;
-
     public $form = [
         'body' => '',
     ];
-    public $form2 = [
-        'body' => '',
-    ];
-    protected $listeners = ['$refresh'];
 
 
     public function addComment($id)
@@ -61,7 +56,8 @@ class Topic extends Component
 
     public function mount($topic_slug)
     {
-        $this->topic = json_decode($this->injectApi()->get(getenv('API_SITE') . '/topics/' . $topic_slug), true);
+        $response = json_decode($this->injectApi()->get(getenv('API_SITE') . '/topics/' . $topic_slug), true);
+        $this->topic = $response;
     }
 
 
