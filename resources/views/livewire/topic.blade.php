@@ -1,11 +1,4 @@
 <div>
-    @if (session()->has('message'))
-        <div class="alert alert-success bg-green-300">
-            {{ session('message') }}
-        </div>
-    @endif
-
-
     <div class="flex bg-slate-200 p-5">
         <div class="mt-2 bg-white">
             <div class="fa w-10 p-2" wire:click="upvoteTopic({{ $topic['id'] }})" title="Upvote"><i

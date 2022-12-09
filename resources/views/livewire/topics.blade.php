@@ -1,19 +1,12 @@
 <div>
-
     {{-- 
-    Flash messages
-     --}}
-    @if (session()->has('message'))
-        <div class="alert alert-success bg-green-300">
-            {{ session('message') }}
-        </div>
-    @endif
-    {{-- 
-Topic input form
+    add topic form
  --}}
     @if ($showDiv)
         <div class="absolute top-200 left-200 w-1/2 rounded-lg bg-slate-100 p-5">
-            <div class="float-right font-semibold text-sm text-gray-400 hover:text-black" wire:click="$toggle('showDiv')"><span class="text-lg">x</span> close</div>
+            <div class="float-right font-semibold text-sm text-gray-400 hover:text-black" wire:click="$toggle('showDiv')">
+                <span class="text-lg">x</span> close
+            </div>
             <div class="font-semibold">Create a Topic</div>
             <div class="h-0.5 bg-white"></div>
             <div class="mt-2">
@@ -55,6 +48,15 @@ Topic input form
                 <input class="w-full text-sm text-gray-400" type="text" class="border-spacing-2 rounded border-2"
                     placeholder="Url" wire:model="form.url" />
             </div>
+            <div class="mt-2">
+                <span class="text-sm">Tags</span>
+                <select class="w-full text-sm text-gray-400" wire:model="form.tags" multiple>
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag['id'] }}">{{ $tag['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="mt-2 pb-5">
                 <button
                     class="float-right w-28 cursor-pointer rounded-lg bg-slate-400 p-1 text-sm text-white hover:text-black"
@@ -93,12 +95,15 @@ Topic list
                             <a href="/topic/{{ $topic['slug'] }}">
                                 {{ $topic['title'] }}
                             </a>
-                            <span
-                                class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">Discussion</span>
+                            @foreach ($topic['tag_names'] as $tag)
+                                <span
+                                    class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">{{$tag}}</span>
+                            @endforeach
                             <br />
                             <span class="text-gray-400">Posted by {{ $topic['author_id'] }} 2 months ago</span>
                         </div>
-                        <div class="p-2 text-gray-400 hover:text-black"><a href="/topic/{{ $topic['slug'] }}"><i class="fa fa-comment fa-1x"></a></i></div>
+                        <div class="p-2 text-gray-400 hover:text-black"><a href="/topic/{{ $topic['slug'] }}"><i
+                                    class="fa fa-comment fa-1x"></a></i></div>
                         <div class="p-2 text-gray-400 hover:text-red-800"><i class="fa fa-flag fa-1x"></i></div>
                         <div class="p-2 text-3xl">
                             <span class=" hover:bg-slate-100">...</span>
@@ -111,7 +116,7 @@ Topic list
                 <div class="w bg-slate-200">
                     <div class="ml-5 w-64 rounded-lg bg-white p-3 text-xs">
                         Your personal Reddit frontpage. Come here to check in with your favorite communities.
-                        <button  wire:click="$toggle('showDiv')"
+                        <button wire:click="$toggle('showDiv')"
                             class="m-2 w-56 rounded-lg bg-blue-600 p-1 text-sm font-medium text-white hover:bg-blue-400">Create
                             Topic</button>
                     </div>

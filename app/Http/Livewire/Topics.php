@@ -10,14 +10,17 @@ class Topics extends Component
 {
     use apiKeyInject;
     public $topics;
+    public $tags;
     public $form = [
         'title' => '',
         'body' => '',
         'url' => '',
         'type' => 'Post',
         'status' => 'Active',
+        'tags' => [],
     ];
     public $showDiv = false;
+
 
     public function addTopic()
     {
@@ -26,20 +29,25 @@ class Topics extends Component
             'form.body' => ['required', 'string'],
         ]);
 
+        $tags = [];
+        foreach ($this->form['tags'] as $tag) {
+            array_push($tags, $tag);
+        }
+
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/forums/17/topics', [
             'title' => $this->form['title'],
             'body' => $this->form['body'],
             'status' => $this->form['status'],
             'type' => $this->form['type'],
             'author_id' => Session::get('author_id'),
-            'tags' => ['red', 'blue', 'green'],
+            'tags' => $tags,
         ]), true);
 
         array_push($this->topics, $response);
-        session()->flash('message', 'Topic successfully added.');
         $this->form['title'] = '';
         $this->form['body'] = '';
         $this->form['url'] = '';
+        $this->form['tags'] = [];
         $this->showDiv = false;
     }
 
@@ -49,6 +57,8 @@ class Topics extends Component
 
         $response = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/forum/topics'), true);
         $this->topics = $response;
+        $response = json_decode($this->injectApi()->get(getenv('API_SITE') . '/forums/17/tags'), true);
+        $this->tags = $response;
     }
 
 
@@ -58,4 +68,3 @@ class Topics extends Component
         return view('livewire.topics');
     }
 }
-

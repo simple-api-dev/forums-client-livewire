@@ -45,7 +45,6 @@ class Comment extends Component
         if (isset($response['points'])) {
             $this->score = $response['points'];
         }
-        $this->emit('refresh');
     }
 
 
