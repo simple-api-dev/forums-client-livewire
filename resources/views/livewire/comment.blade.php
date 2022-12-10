@@ -1,17 +1,10 @@
-<div class="ml-2 bg-white py-1 px-1">
-    @if (session()->has('message'))
-        <div class="alert alert-success bg-green-300">
-            {{ session('message') }}
-        </div>
-    @endif
-
-
+<div class="border-l-2 ml-2 bg-white py-1 px-1">
     <div>
         <span class="text-xs">{{ $comment['author_id'] }}</span> - <span class="text-xs text-gray-500">11 hr.
             ago</span><br />
         <div class="pt-2 text-sm"> {{ $comment['body'] }}</div>
         <div class="flex">
-            <div class="fa w-10 p-2" wire:click="upvoteComment({{ $comment['id'] }})" title="Upvote"><i
+            <div class="fa w-10 p-2" wire:click="upvoteComment({{ $comment['id'] }})" title="Upvote Comment"><i
                     class="fa-arrow-up text-gray-400 hover:text-green-700"></i></div>
             <div class="w-10 p-2 text-xs font-bold text-black"> {{ $comment['score'] }}</div>
             <div class="w-10 p-2" wire:click="downvoteComment({{ $comment['id'] }})" title="Downvote"><i
@@ -31,7 +24,7 @@
                         <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
-                <div><button class="float-right mt-2 rounded-lg bg-blue-600 p-1 text-white"
+                <div><button class="float-right cButton"
                         wire:click="addComment({{ $comment['id'] }})">Reply</button></div>
             </div>
         @endif
@@ -39,7 +32,7 @@
 
     <div class="ml-2 py-1 px-1">
         @foreach ($comment['comments'] as $comment)
-            <div class="border-l-2 border-slate-200">
+            <div class="border-slate-200">
                 <livewire:comment :topic_id="$topic_id" :comment="$comment" :wire:key="$comment['id'] . rand()" />
             </div>
         @endforeach

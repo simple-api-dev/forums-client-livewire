@@ -13,12 +13,13 @@ class Topic extends Component
     public $form = [
         'body' => '',
     ];
+    protected $listeners = ['$refresh'];
 
 
     public function addComment($id)
     {
         $this->validate([
-            'form.body' => ['required', 'string', 'max:255'],
+            'form.body' => ['required', 'string'],
         ]);
 
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/comments/type/topic/' . $id, [

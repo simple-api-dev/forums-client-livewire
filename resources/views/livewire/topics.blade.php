@@ -1,10 +1,62 @@
 <div>
+    <div class="flex flex-row">
+        <div class="flex-grow m-5">
+            {{-- 
+              Add new topic bar
+           --}}
+            <div class="flex bg-white p-0.5 mb-5">
+                <div><i class="fa fa-plus fa-1x py-2"></i></div>
+                <div wire:click="$toggle('showDiv')"
+                    class="w-full bg-slate-100 p-0.5 text-sm text-gray-400 border-2 py-1 border-white hover:border-2 hover:border-blue-100">
+                    Create Topic
+                </div>
+            </div>
+            {{-- 
+            topics
+            --}}
+            @foreach ($topics as $topic)
+                <div class="flex border-2 bg-white p-1">
+                    <div class="flex-grow text-sm text-black font-semibold">
+                        <a href="/topic/{{ $topic['slug'] }}">
+                            {{ $topic['title'] }}
+                        </a>
+                        @foreach ($topic['tag_names'] as $tag)
+                            <span
+                                class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">{{ $tag }}</span>
+                        @endforeach
+                        <br />
+                        <span class="text-gray-400 text-xs">Posted by {{ $topic['author_id'] }} <span
+                                class="text-red-900 line-through">2 months ago</span></span>
+                    </div>
+                    <div class="p-2 text-gray-400 hover:text-black"><a href="/topic/{{ $topic['slug'] }}"><i
+                                class="fa fa-comment fa-1x"></a></i></div>
+                </div>
+            @endforeach
+        </div>
+        {{-- 
+        Right panel 
+        --}}
+        <div class="pt-5 pr-5">
+            <div class="w bg-slate-200">
+                <div class="ml-5 w-64 rounded-lg bg-white p-3 text-xs pb-10">
+                    <div class="bg-blue-500 text-white p-3">About Community</div>
+                    <div class="p-2"> Your personal Reddit frontpage. Come here to check in with your favorite
+                        communities. </div>
+                    <div class="float-right">
+                        <button wire:click="$toggle('showDiv')" class="cButton">Create
+                            Topic</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- 
     add topic form
- --}}
+    --}}
     @if ($showDiv)
-        <div class="absolute top-200 left-200 w-1/2 rounded-lg bg-slate-100 p-5">
-            <div class="float-right font-semibold text-sm text-gray-400 hover:text-black" wire:click="$toggle('showDiv')">
+        <div class="fixed bottom-1/4 left-1/4 w-1/2 rounded-lg bg-slate-100 p-5">
+            <div class="float-right font-semibold text-sm text-gray-400 hover:text-black"
+                wire:click="$toggle('showDiv')">
                 <span class="text-lg">x</span> close
             </div>
             <div class="font-semibold">Create a Topic</div>
@@ -58,70 +110,8 @@
             </div>
 
             <div class="mt-2 pb-5">
-                <button
-                    class="float-right w-28 cursor-pointer rounded-lg bg-slate-400 p-1 text-sm text-white hover:text-black"
-                    wire:click="addTopic">Save</button>
+                <button class="float-right cButton" wire:click="addTopic">Save</button>
             </div>
         </div>
     @endif
-    {{-- 
-Topic list 
---}}
-
-
-
-    <div class="bg-slate-200 p-5">
-        <div class="rounded-lg bg-white p-3">
-            <div wire:click="$toggle('showDiv')"
-                class="rounded-lg bg-slate-100 p-2 text-sm text-gray-400 border-2 border-white hover:border-2 hover:border-blue-300">
-                <i class="fa fa-plus fa-1x p-3"></i>Add a new Topic
-            </div>
-        </div>
-        <div class="h-5 bg-slate-200"></div>
-
-
-        <div class="flex flex-row">
-            <div class="flex-grow">
-
-                @foreach ($topics as $topic)
-                    <div class="flex border-2 bg-white">
-                        <div class="fa bg-gray-50 p-2"><i class="fa-arrow-up text-gray-400 hover:text-green-700"></i>
-                        </div>
-                        <div class="bg-gray-50 p-2 text-xs font-bold text-black">{{ $topic['score'] }}</div>
-                        <div class="bg-gray-50 p-2"><i class="fa fa-arrow-down text-gray-400 hover:text-red-700"></i>
-                        </div>
-                        <div class="p-4"><i class="fa fa-image fa-1x text-gray-400 hover:text-black"></i></div>
-                        <div class="flex-grow text-sm text-black">
-                            <a href="/topic/{{ $topic['slug'] }}">
-                                {{ $topic['title'] }}
-                            </a>
-                            @foreach ($topic['tag_names'] as $tag)
-                                <span
-                                    class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">{{$tag}}</span>
-                            @endforeach
-                            <br />
-                            <span class="text-gray-400">Posted by {{ $topic['author_id'] }} 2 months ago</span>
-                        </div>
-                        <div class="p-2 text-gray-400 hover:text-black"><a href="/topic/{{ $topic['slug'] }}"><i
-                                    class="fa fa-comment fa-1x"></a></i></div>
-                        <div class="p-2 text-gray-400 hover:text-red-800"><i class="fa fa-flag fa-1x"></i></div>
-                        <div class="p-2 text-3xl">
-                            <span class=" hover:bg-slate-100">...</span>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div>
-                <div class="w bg-slate-200">
-                    <div class="ml-5 w-64 rounded-lg bg-white p-3 text-xs">
-                        Your personal Reddit frontpage. Come here to check in with your favorite communities.
-                        <button wire:click="$toggle('showDiv')"
-                            class="m-2 w-56 rounded-lg bg-blue-600 p-1 text-sm font-medium text-white hover:bg-blue-400">Create
-                            Topic</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

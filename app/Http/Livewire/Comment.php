@@ -20,7 +20,7 @@ class Comment extends Component
     public function addComment($comment_id)
     {
         $this->validate([
-            'form.body' => ['required', 'string', 'max:255'],
+            'form.body' => ['required', 'string'],
         ]);
 
         $response = json_decode($this->injectApi()->post(getenv('API_SITE') . '/comments/type/comment/' . $comment_id, [
@@ -30,6 +30,8 @@ class Comment extends Component
         ]), true);
         array_push($this->comment["comments"], $response);
         session()->flash('message', 'Comment successfully added.');
+        $this->form['body'] = '';
+        $this->showDiv = false;
     }
 
 
@@ -43,7 +45,7 @@ class Comment extends Component
         }
 
         if (isset($response['points'])) {
-            $this->score = $response['points'];
+            $this->comment['score'] = $response['points'];
         }
     }
 
@@ -58,9 +60,8 @@ class Comment extends Component
         }
 
         if (isset($response['points'])) {
-            $this->score = $response['points'];
+            $this->comment['score'] = $response['points'];
         }
-        $this->emit('refresh');
     }
 
 

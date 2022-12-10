@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .cBody{
+        @apply text-sm bg-slate-200;
+    }
+    .cButton{
+        @apply w-28 cursor-pointer rounded-lg bg-slate-400 p-1 text-sm text-white hover:text-black;
+    }
+}
