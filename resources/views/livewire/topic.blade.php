@@ -1,5 +1,5 @@
 <div>
-    <div class="flex p-5">
+    <div class="flex  p-5">
         <div class="mt-2 bg-white">
             <div class="fa w-10 p-2" wire:click="upvoteTopic({{ $topic['id'] }})" title="Upvote Topic"><i
                     class="fa-arrow-up text-gray-400 hover:text-green-700"></i></div>
@@ -7,15 +7,16 @@
             <div class="w-10 p-2" wire:click="downvoteTopic({{ $topic['id'] }})" title="Downvote"><i
                     class="fa fa-arrow-down text-gray-400 hover:text-red-700"></i></div>
         </div>
-        <div class="mt-2 bg-white">
+        <div class="mt-2 bg-white flex-grow">
             <div class="flex-grow text-sm text-black">
-                <span class="text-gray-400">Posted by <span class="text-orange-400">{{ $topic['author_id'] }}</span> 2
+                <span class="text-gray-400">Posted by <span class="text-orange-400">{{ $topic['author_id'] }}</span>
+                    2
                     months ago</span><br />
                 <div class="pt-5 font-bold">{{ $topic['title'] }}</div>
                 <div class="pt-5">
                     @foreach ($topic['tag_names'] as $tag)
                         <span
-                            class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">{{$tag}}</span>
+                            class="rounded-lg bg-green-600 p-0.5 text-xs text-white hover:bg-green-400">{{ $tag }}</span>
                     @endforeach
                 </div>
                 <br />
@@ -32,9 +33,7 @@
                     @enderror
                 </div>
                 <div class="pb-10 pt-5 w-10/12">
-                    <button
-                        class="float-right cButton"
-                        wire:click="addComment({{ $topic['id'] }})">Comment</button>
+                    <button class="float-right cButton" wire:click="addComment({{ $topic['id'] }})">Comment</button>
                 </div>
             </div>
             @foreach ($topic['comments'] as $comment)
